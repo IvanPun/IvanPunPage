@@ -44,7 +44,7 @@ const projects = [
         role: "項目負責人",
         tech: ["Vue3", "Element Plus", "Vite"],
         image: new URL("@/assets/image/website.png", import.meta.url).href,
-        demo: "ivanpunpage.netlify.app",
+        demo: "https://ivanpunpage.netlify.app",
         github: "https://github.com/IvanPun/IvanPunPage"
     },
     {
