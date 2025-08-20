@@ -1,0 +1,27 @@
+@import './base.css';
+
+#app {
+  width: 100%;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+body {
+  background: radial-gradient(circle at top left, #1E3A8A, #0D0D0D 70%);
+  color: var(--text-main);
+  font-family: 'Orbitron', sans-serif;
+  /* 科技感字體 */
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
