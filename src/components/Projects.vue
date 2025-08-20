@@ -44,8 +44,8 @@ const projects = [
         role: "項目負責人",
         tech: ["Vue3", "Element Plus", "Vite"],
         image: new URL("@/assets/image/website.png", import.meta.url).href,
-        demo: "https://example.com/demo1",
-        github: "https://github.com/example1"
+        demo: "ivanpunpage.netlify.app",
+        github: "https://github.com/IvanPun/IvanPunPage"
     },
     {
         title: "24款工業軟件優化及部署",
