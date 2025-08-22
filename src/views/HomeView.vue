@@ -46,6 +46,7 @@ const { isMobile } = useDevice();
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10vh;
 }
 
 .welcome{
