@@ -1,18 +1,13 @@
 <template>
   <div class="navbar">
-    <el-menu
-      mode="horizontal"
-      :default-active="active"
-      class="el-menu-demo"
-      @select="handleSelect"
-      :ellipsis="false"
-    >
+    <el-menu mode="horizontal" :default-active="active" class="el-menu-demo" @select="handleSelect" :ellipsis="false">
       <el-menu-item index="/">Home</el-menu-item>
       <el-menu-item index="/about">About</el-menu-item>
       <el-menu-item index="/projects">Projects</el-menu-item>
       <el-menu-item index="/contact">Contact</el-menu-item>
     </el-menu>
   </div>
+  
 </template>
 
 <script setup>
@@ -22,6 +17,7 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
 const active = ref(route.path) // 預設高亮當前路由
+
 
 const handleSelect = (path) => {
   active.value = path
@@ -37,7 +33,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.navbar{
+.navbar {
   height: 15vh;
   display: flex;
   justify-content: flex-end;
@@ -85,4 +81,6 @@ onMounted(() => {
   box-shadow: 0 0 12px #00BFFF, 0 0 24px #8B5CF6, 0 0 32px #8B5CF6 inset;
   transform: scale(0.98);
 }
+
+
 </style>

@@ -10,7 +10,9 @@
         <el-form-item prop="message">
             <el-input type="textarea" v-model="form.message" placeholder="你的留言" :rows="4"></el-input>
         </el-form-item>
-        <el-button type="primary" @click="submitForm">發送留言</el-button>
+        <div class="btn-area">
+            <el-button type="primary" @click="submitForm">發送留言</el-button>
+        </div>
     </el-form>
 </template>
 
@@ -42,8 +44,19 @@ const submitForm = () => {
 
 <style scoped>
 .contact-form {
-  max-width: 500px;
-  margin: 0 auto 2rem;
-  text-align: left;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    text-align: left;
+}
+
+.btn-area {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width:769px) {
+    .btn-area {
+        display: block;
+    }
 }
 </style>

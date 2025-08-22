@@ -1,5 +1,5 @@
 <template>
-    <div class="skill-card">⚡ {{ label }}</div>
+    <div class="skill-card">{{ label }}</div>
 </template>
 
 <script setup>

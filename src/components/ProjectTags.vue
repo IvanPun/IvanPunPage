@@ -19,8 +19,16 @@ const progs = defineProps({
 }
 
 .tags .el-tag {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.9vw;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+@media (min-width:769px) {
+    .tags .el-tag {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
 }
 </style>

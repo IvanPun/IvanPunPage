@@ -2,14 +2,14 @@
     <div style="width: 90vw;margin: auto;">
         <!-- 卡片網格 -->
         <el-row :gutter="20">
-            <el-col :span="12" v-for="(project, index) in projects" :key="index">
+            <el-col :span="isMobile ? 24 : 12" v-for="(project, index) in projects" :key="index">
                 <el-card class="project-card" shadow="hover">
                     <img :src="project.image" class="project-img" alt="project preview" v-if="project.image" />
 
                     <div class="project-content">
-                        <span style="display: flex;justify-content: space-between;align-items: center;">
-                            <h3 style="font-size: 1.5vw;">{{ project.title }}</h3>
-                            <p style="font-size: 1vw;">{{ project.role }}</p>
+                        <span style="display: flex;justify-content: space-between;align-items: baseline;">
+                            <h3 class="project-title">{{ project.title }}</h3>
+                            <p class="project-role">{{ project.role }}</p>
                         </span>
 
                         <p class="description">{{ project.description }}</p>
@@ -36,6 +36,9 @@
 
 <script setup>
 import ProjectTags from './ProjectTags.vue';
+import { useDevice } from '@/composables/useDevice';
+
+const { isMobile } = useDevice();
 
 const projects = [
     {
@@ -121,13 +124,21 @@ const openLink = (url) => {
     border-bottom: 1px solid #eee;
 }
 
+.project-title {
+    font-size: 4rem;
+}
+
+.project-role {
+    font-size: 2.5rem;
+}
+
 .project-content {
     padding: 1rem;
     text-align: left;
 }
 
 .description {
-    font-size: 1vw;
+    font-size: 2.5rem;
     margin: 0.5rem 0 1rem;
     white-space: pre-line;
 }
@@ -135,5 +146,20 @@ const openLink = (url) => {
 .links {
     display: flex;
     gap: 0.5rem;
+}
+
+@media (min-width:769px) {
+    .project-title {
+        font-size: 1.5rem;
+    }
+
+    .project-role {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 1rem;
+        margin: 0.5rem 0 1rem;
+    }
 }
 </style>

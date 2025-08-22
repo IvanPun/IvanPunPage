@@ -13,7 +13,7 @@ const btnType = props.type
 button {
   cursor: pointer;
   border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 2rem;
   margin-right: 1rem;
   border-radius: 0.5rem;
   font-weight: bold;
@@ -39,5 +39,11 @@ button {
 .secondary:hover {
   background: #1E3A8A;
   color: #fff;
+}
+
+@media (min-width: 769px){
+  button{
+    padding: 0.8rem 1.5rem;
+  }
 }
 </style>
