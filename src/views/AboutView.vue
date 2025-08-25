@@ -18,8 +18,10 @@
 import AboutMe from '@/components/AboutMe.vue';
 import SkillsBoard from '@/components/SkillsBoard.vue';
 import { useDevice } from '@/composables/useDevice';
-const skillList = ["Vue3", "JavaScript / TypeScript", "HTML5", "CSS", "Git / GitHub", "UI 設計",
-  "Java", "Python", "C / C++", "攝影"];
+import skillsData from '@/assets/data/skills.json';
+
+const skillList = skillsData.skills;
+
 const { isMobile } = useDevice();
 </script>
 <style scoped>
