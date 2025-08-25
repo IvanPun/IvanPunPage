@@ -8,21 +8,52 @@
 
     <SocialBtns></SocialBtns>
 
-    <Form></Form>
+    <Form :loading = "loading" @update-loading="updateLoading"></Form>
 
     <!-- Footer -->
     <footer class="footer">
       © 2025 IvanPun
     </footer>
   </section>
+  <div class="loading" v-show="loading" v-loading="loading" element-loading-text="郵件發送中..." :element-loading-spinner="svg"
+    element-loading-svg-view-box="-10, -10, 50, 50"></div>
 </template>
 
 <script setup>
 import SocialBtns from '@/components/SocialBtns.vue'
 import Form from '@/components/Form.vue'
+import { ref, watch } from 'vue';
 
+const loading = ref(false)
 
+const updateLoading = (val) => {
+  loading.value = val
+}
+
+const svg = `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `
+watch(loading, (val) => {
+  if (val) {
+    document.body.classList.add('no-scroll')
+  } else {
+    document.body.classList.remove('no-scroll')
+  }
+})
 </script>
+
+<style>
+body.no-scroll {
+  overflow: hidden !important;
+}
+</style>
 
 <style scoped>
 .contact-section {
@@ -63,6 +94,19 @@ import Form from '@/components/Form.vue'
   margin-top: 4rem;
   font-size: 1.5rem;
   color: #666;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width:769px) {
