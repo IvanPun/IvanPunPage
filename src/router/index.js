@@ -29,32 +29,32 @@ const router = createRouter({
       name: 'Contact',
       component: () => import('../views/ContactView.vue'),
     },
-    {
-      path: '/login',
-      name: 'Login',
-      component: () => import('../views/LoginView.vue'),
-    },
-    {
-      path: '/admin',
-      name: 'Admin',
-      component: () => import('../views/AdminView.vue'),
-      meta: { requiresAuth: true }
-    }
+    // {
+    //   path: '/login',
+    //   name: 'Login',
+    //   component: () => import('../views/LoginView.vue'),
+    // },
+    // {
+    //   path: '/admin',
+    //   name: 'Admin',
+    //   component: () => import('../views/AdminView.vue'),
+    //   meta: { requiresAuth: true }
+    // }
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  if (to.meta.requiresAuth) {
-    const { data: { session } } = await supabase.auth.getSession()
-    if (!session) {
-      next({ path: '/login' })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach(async (to, from, next) => {
+//   if (to.meta.requiresAuth) {
+//     const { data: { session } } = await supabase.auth.getSession()
+//     if (!session) {
+//       next({ path: '/login' })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 
 export default router
