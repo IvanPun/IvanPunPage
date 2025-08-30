@@ -21,7 +21,7 @@
 
 <script setup>
 import SocialBtns from '@/components/SocialBtns.vue'
-import Form from '@/components/Form.vue'
+import Form from '@/components/ContactForm.vue'
 import { ref, watch } from 'vue';
 
 const loading = ref(false)

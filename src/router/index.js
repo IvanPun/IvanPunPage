@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { supabase } from '@/composables/supabase'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,16 +29,32 @@ const router = createRouter({
       name: 'Contact',
       component: () => import('../views/ContactView.vue'),
     },
-  ],
-  scrollBehavior(to) {
-    // 自動滾動到對應 section
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-      }
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../views/LoginView.vue'),
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('../views/AdminView.vue'),
+      meta: { requiresAuth: true }
     }
+  ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) {
+      next({ path: '/login' })
+    } else {
+      next()
+    }
+  } else {
+    next()
   }
 })
+
 
 export default router
