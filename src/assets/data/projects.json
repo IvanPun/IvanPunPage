@@ -4,7 +4,7 @@
     "description": "使用 Vue3 + Element Plus 打造的個人展示平台。",
     "role": "項目負責人",
     "tech": ["Vue3", "Element Plus", "Vite"],
-    "image": "/src/assets/image/website.png",
+    "image": "/images/website.png",
     "demo": "https://ivanpunpage.netlify.app",
     "github": "https://github.com/IvanPun/IvanPunPage"
   },
