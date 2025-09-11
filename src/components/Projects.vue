@@ -5,7 +5,7 @@
         <el-row :gutter="20">
             <el-col :span="isMobile ? 24 : 12" v-for="(project, index) in projects" :key="index">
                 <el-card class="project-card" shadow="hover">
-                    <img :src="getImageUrl(project.image)" class="project-img" alt="project preview" v-if="project.image" />
+                    <img :src="getImageUrl(project.image)" class="project-img" :class="{ portrait: isPortrait(project.image) }" alt="project preview" v-if="project.image" />
 
                     <div class="project-content">
                         <span style="display: flex;justify-content: space-between;align-items: baseline;">
@@ -54,6 +54,12 @@ const openLink = (url) => {
     window.open(url, "_blank")
 }
 
+const isPortrait = (image) => {
+  const img = new Image();
+  img.src = getImageUrl(image);
+  return img.height > img.width;
+};
+
 onMounted(async () => {
     loading.value = true
     const data = await getProjects()
@@ -82,9 +88,15 @@ onMounted(async () => {
 
 .project-img {
     width: 100%;
-    height: 160px;
+    max-height: 40vh;
     object-fit: cover;
     border-bottom: 1px solid #eee;
+}
+
+.project-img.portrait {
+    height: auto;       
+    max-height: 40vh;
+    object-fit: contain;
 }
 
 .project-title {
