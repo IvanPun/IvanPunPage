@@ -4,13 +4,13 @@
       <AboutMe></AboutMe>
     </el-col>
     <el-col :span="12" class="right-part">
-      <SkillsBoard :skillList="skillList"></SkillsBoard>
+      <SkillsBoard></SkillsBoard>
     </el-col>
   </el-row>
   <div class="mobile" v-else>
     <AboutMe></AboutMe>
     <div style="width: 80vw;margin-top: 5vh;">
-      <SkillsBoard :skillList="skillList"></SkillsBoard>
+      <SkillsBoard></SkillsBoard>
     </div>
   </div>
 </template>
@@ -18,9 +18,6 @@
 import AboutMe from '@/components/AboutMe.vue';
 import SkillsBoard from '@/components/SkillsBoard.vue';
 import { useDevice } from '@/composables/useDevice';
-import skillsData from '@/assets/data/skills.json';
-
-const skillList = skillsData.skills;
 
 const { isMobile } = useDevice();
 </script>

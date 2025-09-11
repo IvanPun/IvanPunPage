@@ -1,4 +1,8 @@
+import { ref, computed } from "vue";
 import { supabase } from "./supabase";
+import router from "@/router";
+
+const session = ref(null)
 
 export async function signUp(email, password, username) {
     const { data, error } = await supabase.auth.signUp({
@@ -41,14 +45,20 @@ export async function login(username, password) {
     }
 }
 
-export async function checkLogin() {
-    const { data: { session } } = await supabase.auth.getSession()
+export async function logout() {
+    await supabase.auth.signOut();
+    session.value = null;
+    router.push("/login");
+}
 
-    if (session) {
-        console.log("已登入 ✅", session.user)
-        return true
-    } else {
-        console.log("未登入 ❌")
-        return false
-    }
+export function checkLogin() {
+    supabase.auth.getSession().then(({ data }) => {
+        session.value = data.session
+    })
+
+    supabase.auth.onAuthStateChange((_event, newSession) => {
+        session.value = newSession
+    })
+
+    return { isLoggedIn: computed(() => session.value != null) }
 }

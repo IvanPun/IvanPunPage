@@ -1,14 +1,15 @@
 <template>
-    <div style="width: 90vw;margin: auto;">
+    <Loading :loading="loading"></Loading>
+    <div style="width: 90vw;margin: auto;" v-if="!loading" :style="isMobile ? { marginTop: '5vh' } : {}">
         <!-- 卡片網格 -->
         <el-row :gutter="20">
             <el-col :span="isMobile ? 24 : 12" v-for="(project, index) in projects" :key="index">
                 <el-card class="project-card" shadow="hover">
-                    <img :src="project.image" class="project-img" alt="project preview" v-if="project.image" />
+                    <img :src="getImageUrl(project.image)" class="project-img" alt="project preview" v-if="project.image" />
 
                     <div class="project-content">
                         <span style="display: flex;justify-content: space-between;align-items: baseline;">
-                            <h3 class="project-title">{{ project.title }}</h3>
+                            <h3 class="project-title">{{ project.name }}</h3>
                             <p class="project-role">{{ project.role }}</p>
                         </span>
 
@@ -37,13 +38,28 @@
 <script setup>
 import ProjectTags from './ProjectTags.vue';
 import { useDevice } from '@/composables/useDevice';
-import projects from '@/assets/data/projects.json';
+import { getImageUrl } from '@/composables/useImages';
+import { getProjects } from '@/composables/useProjects';
+import { onMounted, ref } from 'vue';
+
+import Loading from './Loading.vue';
+
+const projects = ref([])
+
+const loading = ref(true)
 
 const { isMobile } = useDevice();
 
 const openLink = (url) => {
     window.open(url, "_blank")
 }
+
+onMounted(async () => {
+    loading.value = true
+    const data = await getProjects()
+    projects.value = data || []
+    loading.value = false
+})
 </script>
 
 <style scoped>

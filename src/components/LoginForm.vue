@@ -1,11 +1,12 @@
 <template>
+    <Loading :loading="loading"></Loading>
     <!-- 簡單留言表單 -->
     <el-form ref="contactForm" :model="form" class="contact-form" @submit.prevent="loginSubmit">
         <el-form-item>
             <el-input v-model="form.userId" placeholder="帳戶" ></el-input>
         </el-form-item>
         <el-form-item>
-            <el-input v-model="form.password" placeholder="密碼" type="password" show-password ></el-input>
+            <el-input v-model="form.password" placeholder="密碼" type="password" show-password @keyup.enter.native="loginSubmit"></el-input>
         </el-form-item>
         <div class="btn-area">
             <el-button type="primary" @click="loginSubmit">Login</el-button>
@@ -14,14 +15,13 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 import { login, checkLogin } from '@/composables/useUser';
+import Loading from './Loading.vue';
 
-const props = defineProps({
-    loading: Boolean
-})
+const loading = ref(false)
 
 const emit = defineEmits(['update-loading'])
 
@@ -35,7 +35,7 @@ const loginSubmit = async () => {
         ElMessage.warning('請完整填寫表單！')
         return
     }
-
+    loading.value = true
     let res = await login(form.userId, form.password);
     if(res.success){
         //console.log(res.data);
@@ -43,7 +43,7 @@ const loginSubmit = async () => {
     }else{
         console.error("登入失敗", res.error);
     }
-    
+    loading.value = false
 }
 
 onMounted(() => {

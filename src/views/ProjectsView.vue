@@ -8,14 +8,13 @@
     </h2>
     <p class="subtitle">這裡是我部分代表性的作品</p>
   </div>
-  <Projects :style="isMobile ? { marginTop: '5vh' } : {}"></Projects>
+  <Projects ></Projects>
 </template>
 
 <script setup>
 import { Platform } from '@element-plus/icons-vue';
 import Projects from '@/components/Projects.vue';
-import { useDevice } from '@/composables/useDevice';
-const { isMobile } = useDevice();
+
 </script>
 
 <style scoped>

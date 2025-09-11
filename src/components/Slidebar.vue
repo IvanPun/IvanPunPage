@@ -6,7 +6,13 @@
     </div>
   </div>
   <el-drawer v-model="drawer" :with-header="false" size="25rem" class="myDrawer" style="padding: none;">
-    <el-menu class="drawer-menu" @select="handleSelect" :default-active="active">
+    <el-menu class="drawer-menu" @select="handleSelect" :default-active="active" v-if="isLoggedIn">
+      <el-menu-item index="/admin">Home</el-menu-item>
+      <el-menu-item index="/editSkills">Edit Skills</el-menu-item>
+      <el-menu-item index="/editProjects">Edit Projects</el-menu-item>
+      <el-menu-item @click="logout">Logout</el-menu-item>
+    </el-menu>
+    <el-menu class="drawer-menu" @select="handleSelect" :default-active="active" v-else>
       <el-menu-item index="/">Home</el-menu-item>
       <el-menu-item index="/about">About</el-menu-item>
       <el-menu-item index="/projects">Projects</el-menu-item>
@@ -18,6 +24,9 @@
 import { Fold } from '@element-plus/icons-vue';
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { logout, checkLogin } from '@/composables/useUser';
+
+const { isLoggedIn } = checkLogin()
 
 const router = useRouter()
 const route = useRoute()
@@ -30,7 +39,7 @@ const handleSelect = (path) => {
 }
 
 // 監聽路由變化，更新高亮
-onMounted(() => {
+onMounted(async() => {
   router.afterEach((to) => {
     active.value = to.path
   })
