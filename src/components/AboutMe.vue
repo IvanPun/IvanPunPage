@@ -4,7 +4,7 @@
             <UserFilled style="color: var(--primary-purple);" />
           </el-icon>About Me</h2>
         <p class="intro">
-          我是一名前端開發者，擅長使用 Vue 打造流暢的使用者體驗。<br />
+          我是一名前端開發者，擅長使用 Vue 打造流暢的使用者體驗，<br />同時具備 Node.js 後端開發能力。<br />
           就讀於華東師範大學軟件工程系，曾參與多個個人與團隊項目。<br />
           除了Coding，我也喜歡攝影和閱讀，讓我保持創造力與專注力。
         </p>

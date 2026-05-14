@@ -15,7 +15,7 @@ button {
   border: none;
   padding: 0.8rem 2rem;
   margin-right: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   font-weight: bold;
   transition: all 0.3s ease;
 }
@@ -43,7 +43,7 @@ button {
 
 @media (min-width: 769px){
   button{
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
 }
 </style>

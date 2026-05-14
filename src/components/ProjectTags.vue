@@ -16,12 +16,17 @@ const progs = defineProps({
 <style scoped>
 .tags {
     margin-bottom: 1rem;
+    display: flex;
+    gap: 1vw;
 }
 
 .tags .el-tag {
-    margin-right: 1rem;
     margin-bottom: 1rem;
     font-size: 2rem;
+    padding: 0.7rem 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (min-width:769px) {

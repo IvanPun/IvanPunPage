@@ -1,14 +1,6 @@
 <template>
   <div class="navbar">
-    <el-menu mode="horizontal" :default-active="active" class="el-menu-demo" @select="handleSelect" :ellipsis="false"
-      v-if="isLoggedIn">
-      <el-menu-item index="/admin">Home</el-menu-item>
-      <el-menu-item index="/editSkills">Edit Skills</el-menu-item>
-      <el-menu-item index="/editProjects">Edit Projects</el-menu-item>
-      <el-menu-item @click="logout">Logout</el-menu-item>
-    </el-menu>
-    <el-menu mode="horizontal" :default-active="active" class="el-menu-demo" @select="handleSelect" :ellipsis="false"
-      v-else>
+    <el-menu mode="horizontal" :default-active="active" class="el-menu-demo" @select="handleSelect" :ellipsis="false">
       <el-menu-item index="/">Home</el-menu-item>
       <el-menu-item index="/about">About</el-menu-item>
       <el-menu-item index="/projects">Projects</el-menu-item>
@@ -21,22 +13,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { logout, checkLogin } from '@/composables/useUser';
-
-const { isLoggedIn } = checkLogin()
 
 const router = useRouter()
 const route = useRoute()
-const active = ref(route.path) // 預設高亮當前路由
-
+const active = ref(route.path)
 
 const handleSelect = (path) => {
   active.value = path
   router.push(path)
 }
 
-// 監聽路由變化，更新高亮
-onMounted(async () => {
+onMounted(() => {
   router.afterEach((to) => {
     active.value = to.path
   })

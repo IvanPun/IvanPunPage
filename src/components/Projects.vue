@@ -5,7 +5,8 @@
         <el-row :gutter="20">
             <el-col :span="isMobile ? 24 : 12" v-for="(project, index) in projects" :key="index">
                 <el-card class="project-card" shadow="hover">
-                    <img :src="getImageUrl(project.image)" class="project-img" :class="{ portrait: isPortrait(project.image) }" alt="project preview" v-if="project.image" />
+                    <img :src="getImageUrl(project.image)" class="project-img"
+                        :class="{ portrait: isPortrait(project.image) }" alt="project preview" v-if="project.image" />
 
                     <div class="project-content">
                         <span style="display: flex;justify-content: space-between;align-items: baseline;">
@@ -14,6 +15,8 @@
                         </span>
 
                         <p class="description">{{ project.description }}</p>
+
+                        <p class="unit" v-if="project.unit">單位：{{ project.unit }}</p>
 
                         <ProjectTags :tags="project.tech"></ProjectTags>
 
@@ -55,16 +58,21 @@ const openLink = (url) => {
 }
 
 const isPortrait = (image) => {
-  const img = new Image();
-  img.src = getImageUrl(image);
-  return img.height > img.width;
+    const img = new Image();
+    img.src = getImageUrl(image);
+    return img.height > img.width;
 };
 
 onMounted(async () => {
     loading.value = true
-    const data = await getProjects()
-    projects.value = data || []
-    loading.value = false
+    try {
+        const data = await getProjects()
+        projects.value = Array.isArray(data) ? data : []
+    } catch {
+        projects.value = []
+    } finally {
+        loading.value = false
+    }
 })
 </script>
 
@@ -72,7 +80,7 @@ onMounted(async () => {
 .project-card {
     background: var(--card-bg);
     border: var(--card-border);
-    border-radius: 1rem;
+    border-radius: 8px;
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     backdrop-filter: blur(10px);
@@ -94,7 +102,7 @@ onMounted(async () => {
 }
 
 .project-img.portrait {
-    height: auto;       
+    height: auto;
     max-height: 40vh;
     object-fit: contain;
 }
@@ -118,6 +126,11 @@ onMounted(async () => {
     white-space: pre-line;
 }
 
+.unit {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
 .links {
     display: flex;
     gap: 0.5rem;
@@ -135,6 +148,11 @@ onMounted(async () => {
     .description {
         font-size: 1rem;
         margin: 0.5rem 0 1rem;
+    }
+
+    .unit {
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 }
 </style>

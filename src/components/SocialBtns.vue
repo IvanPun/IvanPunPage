@@ -29,7 +29,7 @@ const copyWechat = () => {
     display: flex;
     margin: 0 1.5rem;
     padding: 1rem 1.5rem;
-    border-radius: 2rem;
+    border-radius: 8px;
     background: #1e3a8a;
     color: #fff;
     font-weight: bold;
@@ -54,7 +54,6 @@ const copyWechat = () => {
     .social-buttons a {
         margin: 0 0.5rem;
         padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
         font-size: 1rem;
     }
 }

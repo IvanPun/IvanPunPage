@@ -1,6 +1,6 @@
 <template>
   <section class="contact-section">
-    <h2>Contact (聯繫方式)</h2>
+    <h2>Contact</h2>
     <p>有任何問題或合作意向，歡迎聯繫我！</p>
 
     <!-- Email -->
@@ -8,7 +8,7 @@
 
     <SocialBtns></SocialBtns>
 
-    <Form :loading = "loading" @update-loading="updateLoading"></Form>
+    <!-- <Form :loading = "loading" @update-loading="updateLoading"></Form> -->
 
     <!-- Footer -->
     <footer class="footer">

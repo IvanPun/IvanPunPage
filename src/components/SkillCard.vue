@@ -12,7 +12,7 @@ const progs = defineProps({
 .skill-card {
     background: rgba(30, 58, 138, 0.2);
     border: 1px solid rgba(0, 191, 255, 0.4);
-    border-radius: 0.8rem;
+    border-radius: 8px;
     padding: 1rem;
     text-align: center;
     font-weight: bold;

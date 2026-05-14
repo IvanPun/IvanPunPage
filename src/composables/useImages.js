@@ -1,26 +1,16 @@
-import { supabase } from "./supabase";
 import { ElMessage } from 'element-plus'
 
 export function getImageUrl(imageName) {
-    const { data } = supabase
-        .storage
-        .from('images')
-        .getPublicUrl(imageName)
-    return data.publicUrl
+  if (!imageName) {
+    return ''
+  }
+  if (/^https?:\/\//i.test(imageName)) {
+    return imageName
+  }
+  return new URL(`../assets/data/project-images/${imageName}`, import.meta.url).href
 }
 
-export async function uploadImage(file, imageName) {
-  // file: File 物件（<input type="file"> 或 el-upload 拿到的）
-  const { data, error } = await supabase.storage
-    .from('images') // bucket 名字
-    .upload(imageName, file, {
-      upsert: true  // 如果檔案已存在會覆蓋（用於修改）
-    })
-
-  if (error) {
-    console.error("圖片上傳失敗",error)
-    return {success: false}
-  }
-
-  return {success: true}
+export async function uploadImage() {
+  ElMessage.warning('靜態站台不支援圖片上傳')
+  return { success: false }
 }
