@@ -14,7 +14,18 @@
                             <p class="project-role">{{ project.role }}</p>
                         </span>
 
-                        <p class="description">{{ project.description }}</p>
+                        <div
+                            v-if="getDescriptionParagraphs(project.description).length"
+                            class="descriptionBlock"
+                        >
+                            <p
+                                v-for="(para, paraIndex) in getDescriptionParagraphs(project.description)"
+                                :key="paraIndex"
+                                class="descriptionParagraph"
+                            >
+                                {{ para }}
+                            </p>
+                        </div>
 
                         <p class="unit" v-if="project.unit">單位：{{ project.unit }}</p>
 
@@ -58,9 +69,22 @@ const openLink = (url) => {
 }
 
 const isPortrait = (image) => {
-    const img = new Image();
-    img.src = getImageUrl(image);
-    return img.height > img.width;
+  const img = new Image();
+  img.src = getImageUrl(image);
+  return img.height > img.width;
+};
+
+/**
+ * 依換行拆成多段，每段單獨套用首行縮排（等同 Word 每段首行縮兩字）。
+ */
+const getDescriptionParagraphs = (text) => {
+  if (text == null || text === '') {
+    return [];
+  }
+  return String(text)
+    .split(/\n/)
+    .map((line) => line.trimEnd())
+    .filter((line) => line !== '');
 };
 
 onMounted(async () => {
@@ -120,10 +144,19 @@ onMounted(async () => {
     text-align: left;
 }
 
-.description {
-    font-size: 2.5rem;
+.descriptionBlock {
     margin: 0.5rem 0 1rem;
+}
+
+.descriptionParagraph {
+    font-size: 2.5rem;
+    margin: 0 0 0.5em;
     white-space: pre-line;
+    text-indent: 2em;
+}
+
+.descriptionParagraph:last-child {
+    margin-bottom: 0;
 }
 
 .unit {
@@ -145,9 +178,12 @@ onMounted(async () => {
         font-size: 1rem;
     }
 
-    .description {
-        font-size: 1rem;
+    .descriptionBlock {
         margin: 0.5rem 0 1rem;
+    }
+
+    .descriptionParagraph {
+        font-size: 1rem;
     }
 
     .unit {
